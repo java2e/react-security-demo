@@ -60,7 +60,8 @@ class LoginForm extends Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            token: ''
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -84,6 +85,7 @@ class LoginForm extends Component {
         login(loginRequest)
         .then(response => {
             localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+            this.setState({token:  response.accessToken})
             Alert.success("You're successfully logged in!");
             this.props.history.push("/");
         }).catch(error => {
@@ -103,18 +105,6 @@ class LoginForm extends Component {
                     <input type="textarea" name="email" 
                         className="form-control" placeholder="jwt"
                         value={jwt} required/>
-                </div>
-
-
-                <div className="form-item">
-                    <input type="email" name="email" 
-                        className="form-control" placeholder="Email"
-                        value={this.state.email} onChange={this.handleInputChange} required/>
-                </div>
-                <div className="form-item">
-                    <input type="password" name="password" 
-                        className="form-control" placeholder="Password"
-                        value={this.state.password} onChange={this.handleInputChange} required/>
                 </div>
                 <div className="form-item">
                     <div style={{width: '20%', float:"left"}}>

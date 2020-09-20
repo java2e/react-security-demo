@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import './Admin.css';
-import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL, ACCESS_TOKEN } from '../../constants';
+import { AUTH0_AUTH_URL,ACCESS_TOKEN } from '../../constants';
 import { login } from '../../util/APIUtils';
 import { Link, Redirect } from 'react-router-dom'
-import fbLogo from '../../img/fb-logo.png';
-import googleLogo from '../../img/google-logo.png';
-import githubLogo from '../../img/github-logo.png';
 import Alert from 'react-s-alert';
+import { Auth0Provider } from "@auth0/auth0-react";
+
 
 class Admin extends Component {
     componentDidMount() {
@@ -31,6 +30,7 @@ class Admin extends Component {
 
 
         return (
+
             <div className="login-container">
                 <div className="login-content">
                     <SocialLogin />
@@ -47,8 +47,8 @@ class SocialLogin extends Component {
     render() {
         return (
             <div className="social-login">
-                <a className="btn btn-block social-btn google" href={GOOGLE_AUTH_URL}>
-                    <img src={googleLogo} alt="Google" /> Log in with Google</a>
+                <a className="btn btn-block social-btn google" href={AUTH0_AUTH_URL}>
+                  Log in with Auth0</a>
             </div>
         );
     }
@@ -103,18 +103,6 @@ class LoginForm extends Component {
                     <input type="textarea" name="email" 
                         className="form-control" placeholder="jwt"
                         value={jwt} required/>
-                </div>
-
-
-                <div className="form-item">
-                    <input type="email" name="email" 
-                        className="form-control" placeholder="Email"
-                        value={this.state.email} onChange={this.handleInputChange} required/>
-                </div>
-                <div className="form-item">
-                    <input type="password" name="password" 
-                        className="form-control" placeholder="Password"
-                        value={this.state.password} onChange={this.handleInputChange} required/>
                 </div>
                 <div className="form-item">
                     <div style={{width: '20%', float:"left"}}>
